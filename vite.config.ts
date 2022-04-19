@@ -4,11 +4,17 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import * as path from 'path'
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 export default ({ command, mode }: ConfigEnv) => {
     return {
         plugins: [
-            vue(),
+            vue({
+                template: { transformAssetUrls }
+            }),
+            quasar({
+                sassVariables: './src/styles/quasar-variables.sass'
+            }),
             AutoImport({
                 resolvers: [ElementPlusResolver()],
                 // 自动导入api，不需要import。
@@ -34,4 +40,3 @@ export default ({ command, mode }: ConfigEnv) => {
         }
     }
 }
-

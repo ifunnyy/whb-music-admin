@@ -2,6 +2,7 @@
 interface ViteEnv {
     VITE_ROUTER_AUTOLOAD_TYPE: string
     VITE_API_URL: string
+    VITE_API_HOST: string
     VITE_URL?: string
     VITE_SITE_NAME: string
 }

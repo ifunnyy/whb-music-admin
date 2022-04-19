@@ -3,6 +3,9 @@ import App from './App.vue'
 import router, { setupRouter } from '@/router'
 import { setupPlugins } from '@/plugins'
 
+import '@quasar/extras/material-icons/material-icons.css'
+import 'quasar/src/css/index.sass'
+
 async function bootstrap() {
     const app = createApp(App)
 
