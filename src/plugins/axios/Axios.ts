@@ -7,7 +7,16 @@ export default class Axios {
         this.instance = axios.create(config)
     }
 
-    public requect<T, D = ResponseResult<T>>(
+    // get 请求
+    public get<T, D = ResponseResult<T>>(uri: string): Promise<D> {
+        return this.requect<T, D>({
+            url: uri,
+            method: 'get'
+        })
+    }
+
+    // 发送请求
+    protected requect<T, D = ResponseResult<T>>(
         config: AxiosRequestConfig
     ): Promise<D> {
         return new Promise(async (resolve, reject) => {

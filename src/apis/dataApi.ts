@@ -9,7 +9,5 @@ export interface DataBodyInterface {
 }
 
 export function getList(params: DataBodyInterface) {
-    return http.requect<DataInterface[]>({
-        url: `data/list`
-    })
+    return http.get<DataInterface[]>(`data/list`)
 }

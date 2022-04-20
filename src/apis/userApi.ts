@@ -29,7 +29,5 @@ export interface InfoInterface {
 }
 
 export function info() {
-    return http.requect<InfoInterface>({
-        url: `user/info`
-    })
+    return http.get<InfoInterface>('user/info')
 }

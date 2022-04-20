@@ -5,7 +5,5 @@ export interface HelloInterface {
 }
 
 export function get() {
-    return http.requect<HelloInterface>({
-        url: `hello`
-    })
+    return http.get<HelloInterface>('/hello')
 }
