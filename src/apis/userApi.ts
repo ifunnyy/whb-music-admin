@@ -21,13 +21,33 @@ export interface MenuInterface {
     children: MenuInterface[]
 }
 
+// 角色信息
+export interface RoleInterface {
+    id: number
+}
+
 export interface InfoInterface {
-    id: string
-    role_id: string
-    name: string
+    id: number
+    username: string
+    nickname: string
+    gender: string
+    locked: boolean
+    enabled: boolean
+    role: RoleInterface[]
     menus: MenuInterface[]
 }
 
 export function info() {
     return http.get<InfoInterface>('user/info')
+}
+
+export interface TokenInterface {
+    token: string
+}
+
+export function login(username: string, password: string) {
+    return http.post<TokenInterface>('user/login', {
+        username,
+        password
+    })
 }

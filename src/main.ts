@@ -5,6 +5,7 @@ import { setupPlugins } from '@/plugins'
 
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
+import '@/styles/global.scss'
 
 async function bootstrap() {
     const app = createApp(App)
@@ -17,7 +18,7 @@ async function bootstrap() {
 
     // 等待路由加载完后再挂载页面
     await router.isReady()
-    
+
     app.mount('#app')
 }
 

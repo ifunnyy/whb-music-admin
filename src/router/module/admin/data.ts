@@ -5,7 +5,7 @@ export default {
     component: () => import('@/layouts/admin.vue'),
     redirect: '/data/index',
     meta: {
-        auth: false,
+        auth: true,
         menu: {
             title: '数据',
             icon: '图表',
@@ -16,13 +16,12 @@ export default {
         {
             path: 'index',
             name: 'data.index',
-            component: () => import('@/views/Data/index.vue'),
-            meta: { 
-                menu: 
-                { 
+            component: () => import('@/views/Admin/Data/index.vue'),
+            meta: {
+                menu: {
                     title: '数据',
-                    sort: 0 
-                } 
+                    sort: 0
+                }
             }
         }
     ]

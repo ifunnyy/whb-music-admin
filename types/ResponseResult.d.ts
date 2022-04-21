@@ -1,6 +1,6 @@
 interface ResponseResult<T> {
     code: number
-    message: string
+    msg: string
     result: boolean
     data: T
 }

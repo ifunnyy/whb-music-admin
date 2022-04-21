@@ -1,10 +1,14 @@
+import router from '@/router'
 import axios, { AxiosRequestConfig } from 'axios'
+import { CacheEnum } from '@/enum/cacheEnum'
+import store from '@/utils/store'
 
 export default class Axios {
     private instance
 
     constructor(config: AxiosRequestConfig) {
         this.instance = axios.create(config)
+        this.interceptors()
     }
 
     // get 请求
@@ -12,6 +16,15 @@ export default class Axios {
         return this.requect<T, D>({
             url: uri,
             method: 'get'
+        })
+    }
+
+    // post 请求
+    public post<T, D = ResponseResult<T>>(uri: string, data: any): Promise<D> {
+        return this.requect<T, D>({
+            url: uri,
+            method: 'post',
+            data
         })
     }
 
@@ -34,11 +47,21 @@ export default class Axios {
         this.interceptorsRequest()
         this.interceptorsResponse()
     }
+
     // 请求拦截器
     private interceptorsRequest() {
         this.instance.interceptors.request.use(
             config => {
-                // 在发送请求之前做些什么
+                // 添加 token
+                if (store.get(CacheEnum.TOKEN_NAME)) {
+                    const token = store.get(CacheEnum.TOKEN_NAME)
+                    config.headers = {
+                        ...config.headers,
+                        ...{
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                }
                 return config
             },
             error => {
@@ -51,13 +74,18 @@ export default class Axios {
     private interceptorsResponse() {
         this.instance.interceptors.response.use(
             response => {
-                // 2xx 范围内的状态码都会触发该函数。
-                // 对响应数据做点什么
                 return response
             },
             error => {
-                // 超出 2xx 范围的状态码都会触发该函数。
-                // 对响应错误做点什么
+                // 401 直接去登录界面
+                if (error.response.status === 401) {
+                    router.push({ name: 'login' })
+                    return
+                }
+                if (error.response.data) {
+                    return Promise.resolve(error.response)
+                }
+
                 return Promise.reject(error)
             }
         )

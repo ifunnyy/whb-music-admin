@@ -23,7 +23,6 @@ const load = async () => {
 
 <style lang="scss">
 .data-container {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
