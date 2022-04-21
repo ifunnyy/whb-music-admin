@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { login } from '@/utils/user'
 
-const username = ref('Ergonomic')
-const password = ref('123456')
+const username = ref('')
+const password = ref('')
 const accept = ref(false)
 
 const onSubmit = () => {
