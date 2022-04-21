@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { login } from '@/utils/user'
+import store from '@/utils/store'
+import { CacheEnum } from '@/enum/cacheEnum'
 
-const username = ref('')
+const username = ref(store.get(CacheEnum.USERNAME) ?? '')
 const password = ref('')
 const accept = ref(false)
 
 const onSubmit = () => {
-    login(username.value, password.value).then(null, error => {
+    login(username.value, password.value, accept.value).then(null, error => {
         console.log(error)
     })
 }

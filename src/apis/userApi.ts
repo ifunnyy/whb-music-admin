@@ -51,3 +51,7 @@ export function login(username: string, password: string) {
         password
     })
 }
+
+export function logout() {
+    return http.get('user/logout')
+}
